@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Конструктор Хоккейной Формы</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Подключение шрифта Stapel (используем похожий базовый sans-serif, так как Stapel может быть платным. Если у вас есть файлы шрифта, добавьте их в папку fonts) -->
+    <style>
+        @font-face {
+            font-family: 'Stapel';
+            src: local('Stapel'), local('Stapel Regular'), local('Arial'), sans-serif;
+            /* Вставьте сюда пути к файлам шрифта, если они у вас есть, например: url('fonts/Stapel.woff2') format('woff2'); */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Канвас для отрисовки всего дизайна -->
+    <div class="canvas-container">
+        <canvas id="designCanvas"></canvas>
+    </div>
+
+    <!-- Панель инструментов -->
+    <div class="controls-panel">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="colors">Цвета</button>
+            <button class="tab-btn" data-tab="patterns">Узоры</button>
+            <button class="tab-btn" data-tab="logos">Лого/Спонсоры</button>
+            <button class="tab-btn" data-tab="text">Текст/Шрифты</button>
+        </div>
+
+        <!-- Вкладка: Цвета -->
+        <div id="tab-colors" class="tab-content active">
+            <div class="color-picker-group">
+                <label>Цвет корпуса:</label>
+                <input type="range" id="hue-slider" min="0" max="360" value="30">
+                <input type="color" id="body-color" value="#f28c28">
+            </div>
+            <div class="color-picker-group">
+                <label>Цвет полос:</label>
+                <input type="color" id="stripe-color" value="#ffffff">
+            </div>
+        </div>
+
+        <!-- Вкладка: Узоры -->
+        <div id="tab-patterns" class="tab-content">
+            <p>Выберите базовый узор:</p>
+            <div class="pattern-grid">
+                <button class="pattern-btn" onclick="changePattern('solid')">Однотонный</button>
+                <button class="pattern-btn" onclick="changePattern('stripes')">Полосы</button>
+                <button class="pattern-btn" onclick="changePattern('shoulders')">Контрастные плечи</button>
+            </div>
+        </div>
+
+        <!-- Вкладка: Лого -->
+        <div id="tab-logos" class="tab-content">
+            <p>Загрузите свой логотип или спонсора (PNG с прозрачностью):</p>
+            <input type="file" id="logo-upload" accept="image/*">
+            <p style="font-size: 12px; color: #888;">*Вы можете перетаскивать загруженные элементы прямо на макете пальцем или мышкой.</p>
+        </div>
+
+        <!-- Вкладка: Текст -->
+        <div id="tab-text" class="tab-content">
+            <input type="text" id="player-name" placeholder="Фамилия (напр. OVECHKIN)" maxlength="12">
+            <input type="number" id="player-number" placeholder="Номер (напр. 8)" maxlength="2" min="1" max="99">
+            <button class="action-btn" onclick="updateText()">Применить текст</button>
+        </div>
+
+        <button class="save-btn" onclick="saveDesign()">Скачать в 2D (PNG)</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
